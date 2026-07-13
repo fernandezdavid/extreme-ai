@@ -1,0 +1,73 @@
+# Señal, no ruido
+
+Un agente que trabaja solo cada mañana y te devuelve **una sola cosa que importa**, no diez reportes para leer.
+
+La IA volvió gratis el construir. Por eso lo escaso ya no es construir, es el criterio: saber qué vale la pena. Este agente no produce por vos, te afila el juicio. Es un motor de criterio, no un chatbot.
+
+## Cómo funciona
+
+Un solo trabajo, tres piezas. Dos exploradores y una síntesis (nada de diez features, la disciplina es parte del punto):
+
+1. **El espía de la competencia** (mirada de afuera): qué se movió en tus rivales.
+2. **La voz del cliente** (mirada de adentro): qué duele de verdad.
+3. **La síntesis** (el acto de criterio): cruza las dos señales y te manda por Telegram *la tensión que importa hoy y por qué*.
+
+Corre solo cada mañana. Vos te despertás con el criterio ya destilado.
+
+## Pre-work (antes de la sesión, solo cuentas y claves, nada de código)
+
+- [ ] Cuenta en **Nous Portal** (el cerebro del agente): https://hermes-agent.nousresearch.com
+- [ ] Un **bot de Telegram**: en Telegram hablá con **@BotFather**, mandá `/newbot`, seguí los pasos, guardá el token que te da.
+- [ ] Tu **user ID de Telegram**: hablá con **@userinfobot**, te da un número. Guardalo.
+- [ ] Definí **2-3 competidores** que quieras vigilar (con el link de su changelog o blog).
+- [ ] Definí **una fuente de voz del cliente** pública (reviews de una app en App Store/Play, o un subreddit).
+
+## Setup (una sola vez, ~30 min)
+
+**1. Instalar Hermes**
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+source ~/.zshrc
+```
+
+**2. Conectar el cerebro (un solo login)**
+```bash
+hermes setup --portal
+```
+
+**3. Conectar Telegram**
+```bash
+hermes gateway setup     # elegís Telegram, pegás el token y tu user ID
+hermes gateway           # lo prende
+```
+(O copiás `.env.example` a `~/.hermes/.env` y completás los dos valores.)
+
+**4. Darle personalidad y contexto**
+- Copiá `SOUL.md` a `~/.hermes/SOUL.md` (cómo te habla el agente).
+- Dejá `HERMES.md` en la carpeta del proyecto (quién sos, tu producto, tus competidores, y qué es señal vs ruido para vos). **Completá los campos entre [corchetes].**
+
+**5. Agendar el trabajo de cada mañana**
+```bash
+hermes cron create       # pegás el prompt de cron-job.md y le ponés horario (ej: 8am)
+hermes cron list         # confirmás que quedó
+hermes cron run <job-id> # lo disparás a mano para probar que llega al Telegram
+```
+
+Si te llega bien una vez, ya está andando.
+
+## Estructura
+
+```
+SOUL.md                        personalidad y estilo del agente
+HERMES.md                      el contexto: quién sos, producto, señal vs ruido
+cron-job.md                    el prompt que corre cada mañana
+.env.example                   plantilla de claves de Telegram
+prompts/
+  01-espia-competencia.md      el explorador de afuera
+  02-voz-del-cliente.md        el explorador de adentro
+  03-sintesis.md               el acto de criterio
+```
+
+## La frontera (opcional, hacia dónde sigue)
+
+El espía lee lo público. La mejor inteligencia suele estar detrás de un pago. El próximo paso es darle un presupuesto al agente para que pague por lo que necesita (vía x402). Ahí el criterio se aplica también a la plata: el agente decide *si* vale la pena pagar. Y el giro para tu producto: mañana tu producto puede cobrarle a los agentes por request.
