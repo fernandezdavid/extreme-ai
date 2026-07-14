@@ -24,6 +24,19 @@ Corre solo cada mañana. Vos te despertás con el criterio ya destilado.
 
 ## Setup (una sola vez, ~30 min)
 
+Hay dos formas: con la **app de escritorio (Hermes Desktop)**, recomendada si no vivís en la terminal, o por **CLI**. Las dos comparten la misma config en `~/.hermes/`, así que podés mezclarlas.
+
+### Opción A — Hermes Desktop (GUI, recomendada)
+
+1. **Instalá o abrí Hermes Desktop** (macOS, Windows o Linux): https://hermes-agent.nousresearch.com
+2. **Conectá el cerebro:** Settings → Model → login con Nous Portal.
+3. **Personalidad:** poné `SOUL.md` en `~/.hermes/SOUL.md` (con el file browser del Desktop o desde Finder).
+4. **Abrí el Project:** Projects → New/Open → seleccioná esta carpeta. Así el agente lee `HERMES.md` y `prompts/` solo. Completá los `[corchetes]` del `HERMES.md`. (Un chat suelto no toma el contexto: tiene que ser dentro del Project.)
+5. **Conectá Telegram:** Settings → Messaging / Integrations → Telegram, cargá el token y tu user ID. (Si no aparece en Settings, se hace con el CLI que trae Desktop: `hermes gateway setup`.)
+6. **Agendá el trabajo:** Automations → nueva automatización en lenguaje natural, por ejemplo: *"Cada mañana a las 8, corré el briefing usando los archivos del proyecto (espía, voz del cliente y síntesis) y mandámelo por Telegram."* Usá "run now" para probar que llega.
+
+### Opción B — CLI
+
 **1. Instalar Hermes**
 ```bash
 curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
