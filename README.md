@@ -14,7 +14,7 @@ Un solo trabajo, tres piezas. Dos exploradores y una síntesis (nada de diez fea
 
 Corre solo cada mañana. Vos te despertás con el criterio ya destilado.
 
-## Pre-work (antes de la sesión, solo cuentas y claves, nada de código)
+## Antes de arrancar (10 min, solo cuentas y claves, nada de código)
 
 - [ ] Cuenta en **Nous Portal** (el cerebro del agente): https://hermes-agent.nousresearch.com
 - [ ] Un **bot de Telegram**: en Telegram hablá con **@BotFather**, mandá `/newbot`, seguí los pasos, guardá el token que te da.
