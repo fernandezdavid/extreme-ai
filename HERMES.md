@@ -22,10 +22,16 @@ Competidores a seguir. Para cada uno, el link más útil (confirmá el changelog
 
 ## Dónde escuchar (la voz del cliente)
 
-Fuente pública de feedback:
+Fuente principal, **reviews de la app**: vienen fechadas, con rating, y no requieren autenticación.
 
-- Reviews públicas de Linear en G2 y Capterra.
-- r/projectmanagement (comparaciones de herramientas) y búsquedas de "Linear app" en X.
+- App Store, feed público de reviews de Linear Mobile (app id `1645587184`):
+  `https://itunes.apple.com/us/rss/customerreviews/id=1645587184/sortBy=mostRecent/json`
+  Devuelve ~50 reviews recientes con título, texto, rating y fecha. Para tu propio producto, cambiá el id (buscalo en `https://itunes.apple.com/search?term=TU+APP&entity=software`).
+- Google Play: ficha de la app de Linear. La versión Android salió en julio de 2026, así que hay reviews frescas.
+
+Fuentes secundarias, útiles como contexto pero con poca trazabilidad:
+- G2 y Capterra: sirven para temas agregados, pero rara vez exponen citas recientes con fecha. No las uses como evidencia fechada.
+- Reddit (r/linear, r/projectmanagement): el mejor material cualitativo, **pero bloquea el acceso automático** (devuelve 403 sin autenticación). Si lo querés, hay que crear una app en `https://www.reddit.com/prefs/apps` (tipo "script") y usar la API con OAuth. Es opcional: sin eso, las reviews de las stores alcanzan.
 
 ## Cómo operamos: el método Linear (la lente para juzgar la señal)
 

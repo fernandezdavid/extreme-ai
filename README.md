@@ -186,6 +186,14 @@ Tres cosas para revisar si terminaste con más de un perfil:
 2. **El bot de Telegram es distinto por perfil.** Si le escribís al bot viejo, no te contesta nadie. Renombrá el que ya no usás en @BotFather (por ejemplo "OLD - no usar") para no confundirte.
 3. **Las automatizaciones viven en el perfil donde las creaste.** `cat ~/.hermes/profiles/TU_PERFIL/cron/jobs.json` para confirmar dónde quedó la tuya.
 
+**El explorador de clientes vuelve vacío o sin citas.**
+No siempre es falta de señal: muchas veces la fuente bloquea el acceso automático. Lo que aprendimos probando:
+- **Reddit devuelve 403** sin autenticación (también en `old.reddit.com` y en los endpoints `.json`). Para usarlo hay que crear una app en `reddit.com/prefs/apps` y consumir la API con OAuth.
+- **G2 y Capterra** rara vez exponen citas recientes con fecha, así que sirven para temas agregados pero no como evidencia fechada.
+- **Lo que sí funciona sin autenticación: el feed de reviews de la App Store.** Devuelve ~50 reviews recientes con texto, rating y fecha:
+  `https://itunes.apple.com/us/rss/customerreviews/id=APP_ID/sortBy=mostRecent/json`
+  Buscá el `APP_ID` de tu producto en `https://itunes.apple.com/search?term=TU+APP&entity=software`.
+
 **El briefing llega pero suena genérico.**
 Dos causas posibles, en orden:
 1. El `SOUL.md` quedó vacío: `wc -c ~/.hermes/SOUL.md` (si da 1, copialo de nuevo).
