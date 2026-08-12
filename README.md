@@ -40,7 +40,9 @@ Y si el agente igual queda sin herramientas, el repo sigue sirviendo: apuntá lo
 
 ## Setup (una sola vez, ~30 min)
 
-Hay dos formas: con la **app de escritorio (Hermes Desktop)**, recomendada si no vivís en la terminal, o por **CLI**. Las dos comparten la misma config en `~/.hermes/`, así que podés mezclarlas.
+Hay dos formas: con la **app de escritorio (Hermes Desktop)**, más amigable si no vivís en la terminal, o por **CLI**. Las dos comparten la misma config, así que podés mezclarlas.
+
+> **Ante la duda, CLI.** La app es cómoda para chatear y ver el proyecto, pero no todo está expuesto en la interfaz (y cambia entre versiones). Si no encontrás dónde configurar algo, o lo configurás y no toma, no pelees con la UI: hacelo por terminal. Los comandos son el camino documentado y siempre funcionan.
 
 > **Quedate en el perfil `default`.** Hermes permite crear varios perfiles, y no los necesitás para esto. Cada perfil es una instancia separada: su propio modelo, sus herramientas, su bot de Telegram, sus automatizaciones y su gateway. Si creás uno nuevo a mitad de camino, todo lo que configuraste antes se queda en el viejo y parece que nada funciona.
 
@@ -59,7 +61,9 @@ Hay dos formas: con la **app de escritorio (Hermes Desktop)**, recomendada si no
    hermes gateway
    ```
    Probalo mandándole "ping" al bot desde Telegram.
-6. **Agendá el trabajo:** Automations → nueva automatización en lenguaje natural, por ejemplo: *"Cada mañana a las 8, corré el briefing usando los archivos del proyecto (espía, voz del cliente y síntesis) y mandámelo por Telegram."* Usá "run now" para probar que llega. Para el primer test, usá el prompt auto-diagnóstico de `cron-job.md`, que te confirma si el agente encontró el contexto.
+6. **Agendá el trabajo:** Automations → nueva automatización en lenguaje natural, por ejemplo: *"Cada mañana a las 8, corré el briefing usando los archivos del proyecto (espía, voz del cliente y síntesis) y mandámelo por Telegram."* Revisá el directorio que te dice que configuró: suele adivinarlo mal (ver Problemas comunes).
+
+Después seguí con **"Probalo en dos pasos"** más abajo: primero el trabajo, después el reparto.
 
 ### Opción B — CLI
 
@@ -91,9 +95,32 @@ wc -c ~/.hermes/SOUL.md    # verificá: ~1100, no 1 (Hermes crea uno vacío por 
 **5. Agendar el trabajo de cada mañana**
 ```bash
 hermes cron create       # pegás el prompt de cron-job.md y le ponés horario (ej: 8am)
-hermes cron list         # confirmás que quedó
-hermes cron run <job-id> # lo disparás a mano para probar que llega al Telegram
+hermes cron list         # confirmás que quedó, y anotás el <job-id>
 ```
+
+## Probalo en dos pasos (no los mezcles)
+
+Acá hay dos cosas que pueden fallar por separado, y confundirlas es la mejor forma de perder una hora sin saber qué tocar:
+
+- **El trabajo:** ¿el brief que produce es bueno?
+- **El reparto:** ¿se dispara solo a la hora indicada y llega a Telegram?
+
+**Paso 1 — probá el trabajo.** Abrí una sesión de chat **dentro del proyecto** (en la app: entrá al proyecto y abrí una sesión nueva; por terminal: `hermes chat` parado en la carpeta del repo) y pegá el prompt auto-diagnóstico de `cron-job.md`. Iterás en segundos y ves el output completo.
+
+Mirá tres cosas en la respuesta:
+1. ¿Arranca con **"Contexto OK: ..."**? Si no, no está leyendo `HERMES.md`.
+2. ¿El espía trae **fecha y cita textual** por hallazgo? Si no, probablemente no tiene herramientas para navegar y está contestando de memoria.
+3. ¿La síntesis devuelve **UNA sola tensión**, o dos reportes? Si son dos, primero probá con un modelo más capaz (`hermes model`) antes de tocar el prompt: los modelos chicos se saltean este tipo de instrucción.
+
+Cuando el brief te guste tres veces seguidas, recién ahí pasás al paso 2.
+
+**Paso 2 — probá el reparto.**
+```bash
+hermes cron list                 # confirmás el <job-id>
+hermes cron run <job-id>         # lo marca para correr
+hermes cron tick                 # fuerza la ejecución ahora
+```
+Ese `tick` es clave: `run` solo lo encola para el próximo tick del scheduler, así que sin él parece que no pasa nada. Para ver qué ocurrió en cada corrida: `hermes cron runs <job-id>`.
 
 Si te llega bien una vez, ya está andando.
 
