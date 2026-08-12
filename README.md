@@ -42,6 +42,8 @@ Y si el agente igual queda sin herramientas, el repo sigue sirviendo: apuntá lo
 
 Hay dos formas: con la **app de escritorio (Hermes Desktop)**, recomendada si no vivís en la terminal, o por **CLI**. Las dos comparten la misma config en `~/.hermes/`, así que podés mezclarlas.
 
+> **Quedate en el perfil `default`.** Hermes permite crear varios perfiles, y no los necesitás para esto. Cada perfil es una instancia separada: su propio modelo, sus herramientas, su bot de Telegram, sus automatizaciones y su gateway. Si creás uno nuevo a mitad de camino, todo lo que configuraste antes se queda en el viejo y parece que nada funciona.
+
 ### Opción A — Hermes Desktop (GUI, recomendada)
 
 1. **Instalá o abrí Hermes Desktop** (macOS, Windows o Linux): https://hermes-agent.nousresearch.com
@@ -136,12 +138,17 @@ cat ~/.hermes/cron/jobs.json    # buscá el directorio del job
 ```
 **Evitá rutas con espacios.** Si tu repo vive en algo como `/Users/vos/Mis Proyectos/extreme-ai`, mové o cloná el repo a una ruta sin espacios (`~/extreme-ai`). Ahorra una clase entera de errores raros.
 
-**Hermes usa perfiles, y es fácil configurar uno y correr en otro.**
-Si tenés más de un perfil (`ls ~/.hermes/profiles/`), asegurate de que el modelo, las herramientas, el `SOUL.md` y la automatización estén **todos en el mismo**. El síntoma clásico: configuraste todo, pero el bot responde como si nada estuviera seteado. Para comparar:
+**Configuré todo y el bot responde como si nada estuviera seteado (o directamente no responde).**
+Casi siempre es un tema de perfiles. Cada perfil de Hermes es una instancia independiente: modelo, herramientas, `SOUL.md`, automatizaciones, **su propio bot de Telegram y su propio gateway**. Configurar en uno y correr en otro es el error clásico.
 ```bash
+ls ~/.hermes/profiles/                                        # ¿tenés más de uno?
 grep -A3 "^model:" ~/.hermes/config.yaml                      # perfil default
-grep -A3 "^model:" ~/.hermes/profiles/TU_PERFIL/config.yaml   # otro perfil
+grep -A3 "^model:" ~/.hermes/profiles/TU_PERFIL/config.yaml   # el otro
 ```
+Tres cosas para revisar si terminaste con más de un perfil:
+1. **El gateway que arrancaste** tiene que ser el del perfil donde está todo configurado.
+2. **El bot de Telegram es distinto por perfil.** Si le escribís al bot viejo, no te contesta nadie. Renombrá el que ya no usás en @BotFather (por ejemplo "OLD - no usar") para no confundirte.
+3. **Las automatizaciones viven en el perfil donde las creaste.** `cat ~/.hermes/profiles/TU_PERFIL/cron/jobs.json` para confirmar dónde quedó la tuya.
 
 **El briefing llega pero suena genérico.**
 Dos causas posibles, en orden:
