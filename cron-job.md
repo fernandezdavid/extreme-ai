@@ -1,8 +1,31 @@
 # El trabajo de cada mañana (prompt del cron)
 
-Este es el prompt que corre solo, todos los días. Lo pegás cuando hacés `hermes cron create` y le ponés horario (ej: 8am).
+Este es el prompt que corre solo, todos los días. Lo pegás cuando hacés `hermes cron create` (o al crear la Automation en Hermes Desktop) y le ponés horario (ej: 8am).
 
-## El prompt
+## Para el PRIMER test: la versión auto-diagnóstica
+
+Usá esta primero. Es igual a la de abajo, pero te confirma si el agente encontró el contexto en vez de dejarte adivinar:
+
+```
+Es tu briefing de la mañana.
+
+Primero, confirmá el contexto: leé HERMES.md del proyecto y empezá tu
+respuesta con una línea que diga "Contexto OK: [nombre del producto] vs
+[competidores que encontraste]". Si no podés leer HERMES.md, decí
+"NO ENCONTRÉ EL CONTEXTO" y frená ahí.
+
+Después:
+1. Corré el espía de la competencia (prompts/01-espia-competencia.md).
+2. Corré la voz del cliente (prompts/02-voz-del-cliente.md).
+3. Cruzá las dos y devolveme la síntesis (prompts/03-sintesis.md): UNA
+   sola tensión que importa hoy, por qué, y qué miraría. No dos reportes.
+
+Mandame el resultado por Telegram.
+```
+
+Si el mensaje llega con "Contexto OK: ...", está leyendo los archivos de verdad y podés pasar al prompt definitivo. Si no, revisá "Problemas comunes" en el README.
+
+## El prompt definitivo
 
 ```
 Es tu briefing de la mañana. Tenés el contexto en HERMES.md (quién soy, mi producto, mis competidores, mis fuentes, y qué es señal vs ruido para mí).

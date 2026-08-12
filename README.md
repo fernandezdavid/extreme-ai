@@ -16,11 +16,27 @@ Corre solo cada mañana. Vos te despertás con el criterio ya destilado.
 
 ## Antes de arrancar (10 min, solo cuentas y claves, nada de código)
 
-- [ ] Cuenta en **Nous Portal** (el cerebro del agente): https://hermes-agent.nousresearch.com
+- [ ] Cuenta en **Nous Portal** (el cerebro del agente): https://hermes-agent.nousresearch.com (ver "¿Cuánto cuesta?" más abajo antes de elegir plan)
 - [ ] Un **bot de Telegram**: en Telegram hablá con **@BotFather**, mandá `/newbot`, seguí los pasos, guardá el token que te da.
 - [ ] Tu **user ID de Telegram**: hablá con **@userinfobot**, te da un número. Guardalo.
 - [ ] Definí **2-3 competidores** que quieras vigilar (con el link de su changelog o blog).
 - [ ] Definí **una fuente de voz del cliente** pública (reviews de una app en App Store/Play, o un subreddit).
+
+## ¿Cuánto cuesta? (leelo antes de elegir plan)
+
+La pieza crítica no es el modelo, son **las herramientas para navegar**. Sin web search y browser, el espía no puede abrir las páginas de tus competidores: contesta de memoria, inventa fechas, y encima te dice que las "verificó". Nos pasó armando esto.
+
+| Camino | Costo | Qué obtenés |
+|---|---|---|
+| **Nous Portal Plus** (recomendado) | ~$20/mes, con créditos incluidos | Modelo + Tool Gateway (web search, browser en la nube). Funciona out of the box. |
+| **Nous Portal Free** | $0 | Solo inferencia con el catálogo de modelos gratuitos. **Sin Tool Gateway**: el agente queda ciego salvo que le des herramientas por otro lado (ver abajo). |
+| **Free + browser propio** | $0, más trabajo | Portal Free (o cualquier proveedor que ya pagues) para el cerebro, y un navegador local para las manos. |
+
+**Si vas por el camino gratis**, tenés dos formas de darle ojos al agente:
+1. **Navegador local:** Hermes puede manejar un Chrome local por CDP. Corré `hermes doctor` para ver qué te falta y seguí la guía de tools de la doc: https://hermes-agent.nousresearch.com/docs/user-guide/features/tools
+2. **Un MCP de búsqueda o fetch:** conectás un servidor MCP que le dé búsqueda web y lectura de páginas. Doc: https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp
+
+Y si el agente igual queda sin herramientas, el repo sigue sirviendo: apuntá los exploradores a fuentes que puedas pegarle a mano (un export de reviews, changelogs copiados). Pierde autonomía, pero la parte más valiosa, el criterio codificado en `HERMES.md` y la síntesis, funciona igual.
 
 ## Setup (una sola vez, ~30 min)
 
@@ -29,11 +45,19 @@ Hay dos formas: con la **app de escritorio (Hermes Desktop)**, recomendada si no
 ### Opción A — Hermes Desktop (GUI, recomendada)
 
 1. **Instalá o abrí Hermes Desktop** (macOS, Windows o Linux): https://hermes-agent.nousresearch.com
-2. **Conectá el cerebro:** Settings → Model → login con Nous Portal.
-3. **Personalidad:** poné `SOUL.md` en `~/.hermes/SOUL.md` (con el file browser del Desktop o desde Finder).
+2. **Conectá el cerebro:** Settings → Model → login con Nous Portal. Si ya tenías Hermes apuntando a otro proveedor, corré `hermes setup --portal` en la terminal para cambiarlo.
+3. **Personalidad:** copiá `SOUL.md` a `~/.hermes/SOUL.md`. **Verificá que se copió**, porque Hermes crea uno vacío por default y es fácil no darse cuenta:
+   ```bash
+   wc -c ~/.hermes/SOUL.md    # tiene que dar ~1100, no 1
+   ```
 4. **Abrí el Project:** Projects → New/Open → seleccioná esta carpeta. Así el agente lee `HERMES.md` y `prompts/` solo. Completá los `[corchetes]` del `HERMES.md`. (Un chat suelto no toma el contexto: tiene que ser dentro del Project.)
-5. **Conectá Telegram:** Settings → Messaging / Integrations → Telegram, cargá el token y tu user ID. (Si no aparece en Settings, se hace con el CLI que trae Desktop: `hermes gateway setup`.)
-6. **Agendá el trabajo:** Automations → nueva automatización en lenguaje natural, por ejemplo: *"Cada mañana a las 8, corré el briefing usando los archivos del proyecto (espía, voz del cliente y síntesis) y mandámelo por Telegram."* Usá "run now" para probar que llega.
+5. **Conectá Telegram:** Settings → Messaging / Integrations → Telegram, cargá el token y tu user ID. Si no aparece en Settings, hacelo con el CLI que ya trae Desktop:
+   ```bash
+   hermes gateway setup
+   hermes gateway
+   ```
+   Probalo mandándole "ping" al bot desde Telegram.
+6. **Agendá el trabajo:** Automations → nueva automatización en lenguaje natural, por ejemplo: *"Cada mañana a las 8, corré el briefing usando los archivos del proyecto (espía, voz del cliente y síntesis) y mandámelo por Telegram."* Usá "run now" para probar que llega. Para el primer test, usá el prompt auto-diagnóstico de `cron-job.md`, que te confirma si el agente encontró el contexto.
 
 ### Opción B — CLI
 
@@ -56,7 +80,10 @@ hermes gateway           # lo prende
 (O copiás `.env.example` a `~/.hermes/.env` y completás los dos valores.)
 
 **4. Darle personalidad y contexto**
-- Copiá `SOUL.md` a `~/.hermes/SOUL.md` (cómo te habla el agente).
+```bash
+cp SOUL.md ~/.hermes/SOUL.md
+wc -c ~/.hermes/SOUL.md    # verificá: ~1100, no 1 (Hermes crea uno vacío por default)
+```
 - Dejá `HERMES.md` en la carpeta del proyecto (quién sos, tu producto, tus competidores, y qué es señal vs ruido para vos). **Completá los campos entre [corchetes].**
 
 **5. Agendar el trabajo de cada mañana**
@@ -80,6 +107,27 @@ prompts/
   02-voz-del-cliente.md        el explorador de adentro
   03-sintesis.md               el acto de criterio
 ```
+
+## Problemas comunes (encontrados armando esto)
+
+**"The model provider failed after retries" en Telegram.**
+El canal anda, falla el cerebro. Mirá el log real:
+```bash
+tail -40 ~/.hermes/logs/errors.log
+```
+La causa más común es de facturación o credenciales del proveedor, no un bug. Si el log menciona límites o cuota de tu suscripción, cambiá de proveedor con `hermes setup --portal`.
+
+**El agente inventa datos o fechas y dice que los "verificó".**
+Casi siempre significa que **no tiene herramientas para navegar**, así que responde de memoria. Buscá esto en el log:
+```bash
+grep "check_browser_requirements\|browser_cdp" ~/.hermes/logs/errors.log | tail -3
+```
+Si aparece `returned False`, el agente está ciego. Necesitás web search y browser habilitados (en Nous Portal, eso es el Tool Gateway, que es de plan pago).
+
+**El briefing llega pero suena genérico.**
+Dos causas posibles, en orden:
+1. El `SOUL.md` quedó vacío: `wc -c ~/.hermes/SOUL.md` (si da 1, copialo de nuevo).
+2. La automatización no está viendo `HERMES.md` ni `prompts/`. Usá el prompt auto-diagnóstico de `cron-job.md`: si el mensaje no arranca con "Contexto OK", no está leyendo los archivos. Solución: apuntá la automatización a la carpeta del proyecto, o pegá el contenido de los tres prompts dentro de la automatización.
 
 ## Las ideas de PM detrás de este agente
 
