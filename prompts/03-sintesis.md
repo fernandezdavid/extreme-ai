@@ -31,4 +31,6 @@ Sos el único de los tres prompts que rankea y recomienda: los exploradores solo
 
 **Verificá vos:** [las 1 o 2 afirmaciones sobre las que se apoya la tensión, cada una con su link, su fecha y su confianza. Ejemplo: "Atlassian lanzó agentes en Confluence (2026-08-10, verificado) → https://... "]
 
+[Si algún explorador quedó sin señal y propuso comprar una fuente paga, agregá al final una línea "Para cerrar el hueco:" con qué fuente, cuánto cuesta y qué cubriría. Si el dato salió de algo ya comprado, citá el archivo de `paid-sources/`.]
+
 Esa última línea no es opcional. Si no podés sostener la tensión con fuentes rastreables, cambiá de tensión o decí que hoy no hay señal firme.

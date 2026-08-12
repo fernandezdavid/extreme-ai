@@ -33,6 +33,18 @@ Fuentes secundarias, útiles como contexto pero con poca trazabilidad:
 - G2 y Capterra: sirven para temas agregados, pero rara vez exponen citas recientes con fecha. No las uses como evidencia fechada.
 - Reddit (r/linear, r/projectmanagement): el mejor material cualitativo, **pero bloquea el acceso automático** (devuelve 403 sin autenticación). Si lo querés, hay que crear una app en `https://www.reddit.com/prefs/apps` (tipo "script") y usar la API con OAuth. Es opcional: sin eso, las reviews de las stores alcanzan.
 
+## Presupuesto para comprar información
+
+Tenés un presupuesto de **$10 al mes** para comprar acceso a fuentes pagas cuando las gratuitas no alcanzan.
+
+Reglas:
+- **Primero mirá `paid-sources/`.** Si ya compramos algo equivalente hace poco, reusalo en vez de gastar de nuevo.
+- **No gastes por gastar.** Solo proponé una compra cuando una exploración volvió sin señal utilizable *y* creés que la fuente paga cubriría ese hueco concreto.
+- **Nunca compres sin autorización.** Proponé: qué fuente, cuánto cuesta, qué hueco cubre. Yo confirmo por chat.
+- Cuando una compra se ejecute, guardá el resultado en `paid-sources/` con el formato de su README.
+
+Fuentes pagas conocidas: búsqueda premium tipo Exa (~$0.007 por consulta), reportes de industria, plataformas de analytics.
+
 ## Cómo operamos: el método Linear (la lente para juzgar la señal)
 
 Esto es lo que nos hace distintos y con lo que filtrás todo. Una novedad solo es señal si mueve una decisión a la luz de esto:

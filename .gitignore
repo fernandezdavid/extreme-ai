@@ -6,3 +6,8 @@ node_modules/
 # Se comparte el mecanismo, no los datos. Ver briefings/README.md
 briefings/*.md
 !briefings/README.md
+
+# Lo que compraste tiene licencia y revela qué investigás.
+# Se comparte la convención, no el contenido. Ver paid-sources/README.md
+paid-sources/*.md
+!paid-sources/README.md
