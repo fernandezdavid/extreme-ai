@@ -124,6 +124,25 @@ grep "check_browser_requirements\|browser_cdp" ~/.hermes/logs/errors.log | tail 
 ```
 Si aparece `returned False`, el agente está ciego. Necesitás web search y browser habilitados (en Nous Portal, eso es el Tool Gateway, que es de plan pago).
 
+**La automatización se creó, pero apunta al lugar equivocado.**
+Es el error más común de todos. Cuando le pedís la automatización en lenguaje natural, el agente adivina el directorio de trabajo, y suele elegir tu carpeta de usuario en vez del repo. Fijate qué te dice al crearla ("Directorio configurado: ..."), y si está mal, corregilo ahí mismo por chat:
+```
+La ruta del proyecto es /ruta/completa/a/extreme-ai
+Ajustá la automation para que use ese directorio.
+```
+Verificalo también desde afuera:
+```bash
+cat ~/.hermes/cron/jobs.json    # buscá el directorio del job
+```
+**Evitá rutas con espacios.** Si tu repo vive en algo como `/Users/vos/Mis Proyectos/extreme-ai`, mové o cloná el repo a una ruta sin espacios (`~/extreme-ai`). Ahorra una clase entera de errores raros.
+
+**Hermes usa perfiles, y es fácil configurar uno y correr en otro.**
+Si tenés más de un perfil (`ls ~/.hermes/profiles/`), asegurate de que el modelo, las herramientas, el `SOUL.md` y la automatización estén **todos en el mismo**. El síntoma clásico: configuraste todo, pero el bot responde como si nada estuviera seteado. Para comparar:
+```bash
+grep -A3 "^model:" ~/.hermes/config.yaml                      # perfil default
+grep -A3 "^model:" ~/.hermes/profiles/TU_PERFIL/config.yaml   # otro perfil
+```
+
 **El briefing llega pero suena genérico.**
 Dos causas posibles, en orden:
 1. El `SOUL.md` quedó vacío: `wc -c ~/.hermes/SOUL.md` (si da 1, copialo de nuevo).
