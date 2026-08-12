@@ -81,6 +81,23 @@ prompts/
   03-sintesis.md               el acto de criterio
 ```
 
+## Las ideas de PM detrás de este agente
+
+Este repo no inventa frameworks: toma prestadas ideas probadas de la mejor gente de producto y las convierte en archivos que un agente puede ejecutar. Cada pieza es una de estas ideas, hecha contexto:
+
+| La idea | De quién | Dónde vive en este repo |
+|---|---|---|
+| **Build the right thing.** El rol no es producir más, es resolver el problema correcto. | [Marty Cagan (SVPG)](https://www.svpg.com/) | La tesis de todo el repo: el agente no construye por vos, te afila el criterio. |
+| **Contratar → onboardear → poner a trabajar.** A una IA la sumás como a un integrante del equipo. | [Tal Raviv, "Build your personal AI copilot" (Lenny's Newsletter)](https://www.lennysnewsletter.com/p/build-your-personal-ai-copilot) | La estructura del setup: `SOUL.md` (lo contratás), `HERMES.md` (lo onboardeás), `cron-job.md` (lo ponés a trabajar). |
+| **"El contexto lo cambia todo."** La IA parece genérica porque no le diste contexto. | [Tal Raviv, mismo post](https://www.lennysnewsletter.com/p/build-your-personal-ai-copilot) | `HERMES.md`: quién sos, tu producto, y qué es señal vs ruido para vos. |
+| **Continuous discovery.** Escucha continua del mercado y del cliente. | [Teresa Torres](https://www.producttalk.org/) | Los dos exploradores: `prompts/01` (competencia) y `prompts/02` (clientes). |
+| **Tareas LNO.** Delegá lo de bajo apalancamiento, quedate con lo de alto. | [Shreyas Doshi](https://x.com/shreyas) | El cron: el agente se queda con el overhead de cada mañana, vos con las decisiones. |
+| **Gestionás una IA como a una persona.** Contexto claro, objetivo claro, feedback. | ["How to become a supermanager with AI" (Lenny's)](https://www.lennysnewsletter.com/p/how-to-become-a-supermanager-with-ai) | El loop completo: editás el `SOUL.md`, corregís el contexto, iterás los prompts. |
+| **"¿Qué es lo más importante que debería hacer ahora?"** La pregunta de un buen thinking partner. | [Tal Raviv, mismo post](https://www.lennysnewsletter.com/p/build-your-personal-ai-copilot) | `prompts/03-sintesis.md`: la síntesis responde exactamente eso, una sola tensión y por qué. |
+| **Taste sobre métricas, anti-bloat.** El criterio propio como filtro de la señal. | [El método Linear](https://linear.app/method) | La lente del `HERMES.md` de ejemplo: "un competidor agregó features" puede ser ruido, no amenaza. |
+
+Y una cita para el espíritu del repo, de Daniel Kahneman: *"No soy un genio. Tversky tampoco. Juntos somos excepcionales."* El agente es el socio. El criterio es tuyo.
+
 ## La frontera (opcional, hacia dónde sigue)
 
 El espía lee lo público. La mejor inteligencia suele estar detrás de un pago. El próximo paso es darle un presupuesto al agente para que pague por lo que necesita (vía x402). Ahí el criterio se aplica también a la plata: el agente decide *si* vale la pena pagar. Y el giro para tu producto: mañana tu producto puede cobrarle a los agentes por request.
