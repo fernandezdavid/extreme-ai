@@ -186,6 +186,23 @@ Tres cosas para revisar si terminaste con más de un perfil:
 2. **El bot de Telegram es distinto por perfil.** Si le escribís al bot viejo, no te contesta nadie. Renombrá el que ya no usás en @BotFather (por ejemplo "OLD - no usar") para no confundirte.
 3. **Las automatizaciones viven en el perfil donde las creaste.** `cat ~/.hermes/profiles/TU_PERFIL/cron/jobs.json` para confirmar dónde quedó la tuya.
 
+**El agente contesta genérico, pero si le pedís que lea su SOUL.md te cita el correcto.**
+Clásico: el `SOUL.md` está en la carpeta del proyecto, pero **la identidad se carga desde el HOME de Hermes**, no desde el repo. Ahí es solo un archivo más que puede leer si se lo pedís. Tiene que estar en los dos lugares o, al menos, en el home:
+```bash
+cp SOUL.md ~/.hermes/SOUL.md
+wc -c ~/.hermes/SOUL.md    # ~1100 = el tuyo. ~513 = el genérico de Hermes. 1 = vacío.
+```
+Si tu agente corre en la nube, aplica igual: copiarlo dentro del repo clonado no alcanza, tiene que ir al home de Hermes de esa instancia.
+
+**El agente dice ser otro, o arrastra preferencias que nunca le diste.**
+Hermes tiene **memoria persistente** y aprende de sesiones anteriores. Si antes configuraste otro agente (con otro nombre, otro perfil, otras costumbres), lo recordado sobrevive al cambio de perfil y contamina al nuevo. Nos pasó: un agente recién creado se presentó con el nombre de su antecesor.
+```bash
+cat ~/.hermes/memories/USER.md      # mirá qué "sabe" de vos
+cp ~/.hermes/memories/USER.md ~/.hermes/memories/USER.md.bak   # backup
+: > ~/.hermes/memories/USER.md      # empezar limpio
+```
+Antes de una demo o de un setup nuevo, **revisá esa memoria.** El contexto de un agente no es solo lo que le escribís hoy, también es lo que recuerda de ayer.
+
 **El explorador de clientes vuelve vacío o sin citas.**
 No siempre es falta de señal: muchas veces la fuente bloquea el acceso automático. Lo que aprendimos probando:
 - **Reddit devuelve 403** sin autenticación (también en `old.reddit.com` y en los endpoints `.json`). Para usarlo hay que crear una app en `reddit.com/prefs/apps` y consumir la API con OAuth.
