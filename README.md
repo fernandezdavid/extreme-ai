@@ -135,6 +135,7 @@ prompts/
   01-espia-competencia.md      el explorador de afuera
   02-voz-del-cliente.md        el explorador de adentro
   03-sintesis.md               el acto de criterio
+  EVOLUCION.md                 cómo llegaron a ser así (los errores que los formaron)
 briefings/                     cada brief queda archivado acá (y se anota)
 ```
 
@@ -205,7 +206,7 @@ Antes de una demo o de un setup nuevo, **revisá esa memoria.** El contexto de u
 
 **El explorador de clientes vuelve vacío o sin citas.**
 No siempre es falta de señal: muchas veces la fuente bloquea el acceso automático. Lo que aprendimos probando:
-- **Reddit devuelve 403** sin autenticación (también en `old.reddit.com` y en los endpoints `.json`). Para usarlo hay que crear una app en `reddit.com/prefs/apps` y consumir la API con OAuth.
+- **Reddit devuelve 403** sin autenticación (también en `old.reddit.com` y en los endpoints `.json`). Dos salidas: crear una app en `reddit.com/prefs/apps` y usar la API con OAuth, o **llegar a Reddit vía una búsqueda paga**, que lo tiene indexado. Con Exa se fuerza con `{"query":"...","includeDomains":["reddit.com"]}`. Es la razón más honesta para pagar una búsqueda: la mejor fuente cualitativa está cerrada de arriba.
 - **G2 y Capterra** rara vez exponen citas recientes con fecha, así que sirven para temas agregados pero no como evidencia fechada.
 - **Lo que sí funciona sin autenticación: el feed de reviews de la App Store.** Devuelve ~50 reviews recientes con texto, rating y fecha:
   `https://itunes.apple.com/us/rss/customerreviews/id=APP_ID/sortBy=mostRecent/json`

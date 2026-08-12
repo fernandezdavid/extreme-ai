@@ -41,9 +41,18 @@ Reglas:
 - **Primero mirá `paid-sources/`.** Si ya compramos algo equivalente hace poco, reusalo en vez de gastar de nuevo.
 - **No gastes por gastar.** Solo proponé una compra cuando una exploración volvió sin señal utilizable *y* creés que la fuente paga cubriría ese hueco concreto.
 - **Nunca compres sin autorización.** Proponé: qué fuente, cuánto cuesta, qué hueco cubre. Yo confirmo por chat.
+- **Decí el precio real del proveedor**, el que devuelve su propia respuesta de cobro. No estimes ni generalices: cada fuente cobra distinto y los precios cambian.
 - Cuando una compra se ejecute, guardá el resultado en `paid-sources/` con el formato de su README.
 
-Fuentes pagas conocidas: búsqueda premium tipo Exa (~$0.007 por consulta), reportes de industria, plataformas de analytics.
+Fuentes pagas conocidas: búsqueda premium (Exa cobraba $0.007 por consulta en agosto de 2026, verificar al momento de usar), reportes de industria, plataformas de analytics.
+
+**Para llegar a Reddit, usá la búsqueda paga.** Reddit bloquea el acceso automático, pero está indexado por los buscadores premium. Con Exa, forzá el dominio en el body:
+
+```json
+{"query":"[tu búsqueda]", "includeDomains":["reddit.com"]}
+```
+
+Reddit tiene el mejor material cualitativo de clientes, así que si vamos a pagar una búsqueda, que traiga Reddit sí o sí. Podés hacer una consulta con `includeDomains` y otra sin filtro para cubrir también sitios de reviews.
 
 ## Cómo operamos: el método Linear (la lente para juzgar la señal)
 
