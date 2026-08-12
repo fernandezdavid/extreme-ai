@@ -46,7 +46,13 @@ Reglas:
 
 Fuentes pagas conocidas: búsqueda premium (Exa cobraba $0.007 por consulta en agosto de 2026, verificar al momento de usar), reportes de industria, plataformas de analytics.
 
-**Sobre Reddit (probado, no funciona):** intentamos llegar a Reddit vía búsqueda paga usando `{"includeDomains":["reddit.com"]}`. La consulta se pagó y devolvió **cero resultados de Reddit**. Reddit no está disponible por esa vía. La única forma real es su API con OAuth. No gastes en búsquedas filtradas por reddit.com esperando que funcione.
+**Redes sociales por búsqueda paga: probado, no funciona (agosto 2026).**
+- **Reddit** con `{"includeDomains":["reddit.com"]}`: se cobró la consulta y devolvió **cero resultados de Reddit**.
+- **X/Twitter** con `{"category":"tweet"}`: el proveedor respondió `400 — The "tweet" category is no longer supported`, **y la consulta se cobró igual**.
+
+Para redes sociales, la única vía real es la API propia de cada plataforma con sus credenciales. No gastes búsquedas pagas intentando llegar ahí.
+
+**Ojo con esto último, que es una regla de presupuesto:** una request que falla puede cobrarse igual. El error del proveedor no garantiza que no se te cobre. Por eso el tope mensual y la autorización previa no son opcionales.
 
 **Lo que sí devuelve la búsqueda paga:** sitios de reviews con contenido fechado y citable (Trustpilot, PeerSpot, Findstack, G2 y similares). Eso es suficiente para la pata de voz del cliente, y complementa bien las reviews de la App Store.
 

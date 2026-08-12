@@ -33,6 +33,14 @@ Es un caso normal, no un error: el agente puede tener las manos para buscar pero
 
 El repo es el punto de encuentro entre los dos sistemas: uno decide qué vale la pena comprar, el otro paga, y el archivo los conecta.
 
+## Una request fallida se puede cobrar igual
+
+Probado con plata real: una consulta que el proveedor rechazó con `400` **se cobró de todas formas**. El error del merchant no garantiza que el pago no se ejecute.
+
+Dos consecuencias prácticas:
+- **Guardá también los fallos** en esta carpeta, con el error y el costo. Si no, vas a repetir la consulta que ya pagaste y falló.
+- **El presupuesto es un tope real, no una formalidad.** Un agente con permiso para gastar puede gastar mal.
+
 ## Privacidad
 
 Los contenidos pagos suelen tener licencia de uso, y además revelan qué estás investigando. Por eso el `.gitignore` excluye los archivos con fecha: se comparte la convención, no lo que compraste.
