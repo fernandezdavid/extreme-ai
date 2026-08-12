@@ -1,3 +1,8 @@
 .env
 .DS_Store
 node_modules/
+
+# Los briefs diarios traen contexto tuyo (producto, clientes, competencia).
+# Se comparte el mecanismo, no los datos. Ver briefings/README.md
+briefings/*.md
+!briefings/README.md

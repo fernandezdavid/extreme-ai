@@ -19,8 +19,10 @@ Después:
 2. Corré la voz del cliente (prompts/02-voz-del-cliente.md).
 3. Cruzá las dos y devolveme la síntesis (prompts/03-sintesis.md): UNA
    sola tensión que importa hoy, por qué, y qué miraría. No dos reportes.
+   Incluí la línea "Verificá vos" con los links de respaldo.
 
-Mandame el resultado por Telegram.
+Guardá el resultado en briefings/AAAA-MM-DD.md (con la fecha de hoy) y
+mandámelo por Telegram.
 ```
 
 Si el mensaje llega con "Contexto OK: ...", está leyendo los archivos de verdad y podés pasar al prompt definitivo. Si no, revisá "Problemas comunes" en el README.
@@ -36,9 +38,9 @@ Hacé esto en orden:
 
 2. Corré la exploración de la voz del cliente (ver prompts/02-voz-del-cliente.md): qué duele en mis clientes.
 
-3. Cruzá las dos y devolveme la síntesis (ver prompts/03-sintesis.md): UNA sola tensión que importa hoy, por qué, y qué miraría. No me mandes dos reportes.
+3. Cruzá las dos y devolveme la síntesis (ver prompts/03-sintesis.md): UNA sola tensión que importa hoy, por qué, y qué miraría. No me mandes dos reportes. Terminá siempre con la línea "Verificá vos": los links y fechas que respaldan la tensión, para que pueda chequearlo en 30 segundos.
 
-Mandame el resultado por Telegram. Si hoy no hay señal real, mandame "Nada que requiera tu atención hoy" y listo.
+Guardá el brief completo en briefings/AAAA-MM-DD.md (con la fecha de hoy) y mandámelo por Telegram. Si hoy no hay señal real, mandame "Nada que requiera tu atención hoy" y guardalo igual.
 ```
 
 ## Cómo agendarlo

@@ -135,7 +135,16 @@ prompts/
   01-espia-competencia.md      el explorador de afuera
   02-voz-del-cliente.md        el explorador de adentro
   03-sintesis.md               el acto de criterio
+briefings/                     cada brief queda archivado acá (y se anota)
 ```
+
+## Trust but verify
+
+Dos reglas que el agente tiene que cumplir, y que están en los prompts:
+
+**Toda afirmación viene con su fuente.** El brief cierra con una línea "Verificá vos": los links y fechas sobre los que se apoya la tensión del día. Si no podés chequearlo en 30 segundos, no sirve. Un agente que afirma sin fuente no te ahorra trabajo, te lo esconde.
+
+**Cada brief queda archivado.** En `briefings/`, con la fecha. Lo leés, le ponés un veredicto de dos líneas, y con el tiempo tenés algo mucho más valioso que los briefs sueltos: un registro de cuándo tu agente acierta y cuándo no. Eso es un conjunto de evaluación, y es lo que te permite saber si un cambio de modelo o de prompt mejoró algo o solo te gustó más. Cómo usarlo: `briefings/README.md`.
 
 ## Problemas comunes (encontrados armando esto)
 
